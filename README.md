@@ -24,9 +24,10 @@
 A multi-agent Agno Team that simulates an autonomous startup workforce. Specialized AI agents (e.g., Product Manager, Market Research, Sales, Legal, Finance, Support) coordinate under a CEO agent to self-organize tasks, make strategic decisions, and drive product development, market analysis, compliance, sales execution, and customer support. Built with Agno’s team orchestration, shared knowledge, and tool integrations, it showcases scalable AI collaboration for complex, real-world business workflows.. Built on the [Bindu Agent Framework](https://github.com/getbindu/bindu) for the Internet of Agents.
 
 **Key Capabilities:**
-- 🔍 [Add your key capabilities here]
-- ✅ [Add another capability]
-- 🚨 [Add another capability]
+- 🤝 **CEO-led Team Orchestration**: Coordinates 5 specialized agents for strategic decision-making
+- 🔍 **Market Intelligence**: Real-time research via DuckDuckGo and Exa tools
+- 💼 **Cross-functional Analysis**: Product, finance, legal, sales, and market perspectives
+- 🧠 **Memory Persistence**: Maintains context across conversations with Mem0
 
 ---
 
@@ -34,9 +35,9 @@ A multi-agent Agno Team that simulates an autonomous startup workforce. Speciali
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.8+
 - [uv](https://github.com/astral-sh/uv) package manager
-- API keys for OpenRouter and Mem0 (both have free tiers)
+- API keys for OpenRouter, Mem0, and Exa
 
 ### Installation
 
@@ -63,7 +64,8 @@ Edit `.env` and add your API keys:
 | Key | Get It From | Required |
 |-----|-------------|----------|
 | `OPENROUTER_API_KEY` | [OpenRouter](https://openrouter.ai/keys) | ✅ Yes |
-| `MEM0_API_KEY` | [Mem0 Dashboard](https://app.mem0.ai/dashboard/api-keys) | If you want to use Mem0 tools |
+| `MEM0_API_KEY` | [Mem0 Dashboard](https://app.mem0.ai/dashboard/api-keys) | ✅ Yes |
+| `EXA_API_KEY` | [Exa Dashboard](https://exa.ai/dashboard/api-keys) | ✅ Yes |
 
 ### Run the Agent
 
@@ -93,34 +95,38 @@ gh repo create raahulrahl/autonomous-startup-team-agent --public --source=. --re
 ### Example Queries
 
 ```bash
-# Example query 1
-"[Add example query here]"
+# Market entry strategy
+"Analyze our market opportunity and create a go-to-market strategy for our new SaaS product"
 
-# Example query 2
-"[Add another example]"
+# Partnership evaluation
+"Review this partnership proposal and assess legal, financial, and strategic implications"
+
+# Product roadmap
+"Create a product roadmap based on current market trends and competitive analysis"
 ```
 
 ### Input Formats
 
 **Plain Text:**
 ```
-[Describe expected input format]
+Analyze the market for our AI-powered analytics platform
 ```
 
 **JSON:**
 ```json
 {
-  "content": "[example content]",
-  "focus": "[example focus]"
+  "role": "user",
+  "content": "Evaluate partnership with TechCorp for API integration. They want 20% revenue share."
 }
 ```
 
 ### Output Structure
 
 The agent returns structured output with:
-- **[Output Component 1]**: Description
-- **[Output Component 2]**: Description
-- **[Output Component 3]**: Description
+- **CEO Strategic Synthesis**: High-level recommendations and decisions
+- **Individual Agent Responses**: Detailed insights from each specialized agent
+- **Markdown Formatting**: Well-structured analysis with citations
+- **Action Items**: Clear next steps and risk assessments
 
 ---
 
@@ -145,30 +151,36 @@ For complete API documentation, request/response formats, and examples, visit:
 
 ## 🎯 Skills
 
-### autonomous_startup_team_agent (v1.0.0)
+### Autonomous Startup Business Execution (v1.0.0)
 
 **Primary Capability:**
-- [Describe what this skill does]
-- [Add key features]
+- CEO agent orchestrates 5 specialized agents (Product Manager, Market Research, Financial Analyst, Legal Compliance, Sales)
+- Cross-functional team coordination for strategic business decisions
 
 **Features:**
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+- **Product Manager**: Roadmap planning, feature prioritization, requirements
+- **Market Research**: Competitive analysis, trends, customer insights (DuckDuckGo, Exa)
+- **Financial Analyst**: Projections, pricing models, cash flow analysis (DuckDuckGo)
+- **Legal Compliance**: Regulatory compliance, contract review, IP protection (Exa)
+- **Sales & Partnerships**: Business development, deal negotiation, relationship management
 
 **Best Used For:**
-- [Use case 1]
-- [Use case 2]
-- [Use case 3]
+- Strategic planning requiring cross-functional input
+- Partnership and business development evaluation
+- Product roadmap creation with market validation
+- Comprehensive market entry analysis
+- Legal compliance review for new initiatives
 
 **Not Suitable For:**
-- [Anti-pattern 1]
-- [Anti-pattern 2]
+- Simple single-function tasks
+- Real-time customer support
+- Technical implementation or coding
+- Tasks requiring human legal/financial authority
 
 **Performance:**
-- Average processing time: ~[X] seconds
-- Max concurrent requests: [N]
-- Memory per request: [X]MB
+- Average processing time: ~5-10 seconds
+- Max concurrent requests: 5
+- Memory per request: 512MB
 
 ---
 
@@ -188,6 +200,7 @@ docker-compose up --build
 The agent runs on port `3773` and requires:
 - `OPENROUTER_API_KEY` environment variable
 - `MEM0_API_KEY` environment variable
+- `EXA_API_KEY` environment variable
 
 Configure these in your `.env` file before running.
 
