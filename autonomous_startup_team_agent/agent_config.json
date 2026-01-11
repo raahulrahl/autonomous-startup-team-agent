@@ -1,7 +1,7 @@
 {
   "author": "raahul@getbindu.com",
   "name": "autonomous-startup-team-agent",
-  "description": "A multi-agent Agno Team that simulates an autonomous startup workforce. Specialized AI agents (e.g., Product Manager, Market Research, Sales, Legal, Finance, Support) coordinate under a CEO agent to self-organize tasks, make strategic decisions, and drive product development, market analysis, compliance, sales execution, and customer support. Built with Agno\u2019s team orchestration, shared knowledge, and tool integrations, it showcases scalable AI collaboration for complex, real-world business workflows.",
+  "description": "A multi-agent Agno Team that simulates an autonomous startup workforce. Specialized AI agents coordinate under a CEO agent to self-organize tasks, make strategic decisions, and drive product development, market analysis, compliance, sales execution, and customer support. Built with Agno's team orchestration, shared knowledge, and tool integrations for scalable AI collaboration.",
   "version": "1.0.0",
   "recreate_keys": false,
   "skills": [
