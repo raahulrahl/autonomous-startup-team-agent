@@ -1,51 +1,44 @@
 {
-    "author": "raahul@getbindu.com",
-    "name": "autonomous-startup-team-agent",
-    "description": "A multi-agent Agno Team that simulates an autonomous startup workforce. Specialized AI agents (e.g., Product Manager, Market Research, Sales, Legal, Finance, Support) coordinate under a CEO agent to self-organize tasks, make strategic decisions, and drive product development, market analysis, compliance, sales execution, and customer support. Built with Agno’s team orchestration, shared knowledge, and tool integrations, it showcases scalable AI collaboration for complex, real-world business workflows.",
-    "version": "1.0.0",
-    "recreate_keys": false,
-    
-    "skills": [
-      
-      
-        "skills/Autonomous startup business execution"
-      
+  "author": "raahul@getbindu.com",
+  "name": "autonomous-startup-team-agent",
+  "description": "A multi-agent Agno Team that simulates an autonomous startup workforce. Specialized AI agents (e.g., Product Manager, Market Research, Sales, Legal, Finance, Support) coordinate under a CEO agent to self-organize tasks, make strategic decisions, and drive product development, market analysis, compliance, sales execution, and customer support. Built with Agno\u2019s team orchestration, shared knowledge, and tool integrations, it showcases scalable AI collaboration for complex, real-world business workflows.",
+  "version": "1.0.0",
+  "recreate_keys": false,
+  "skills": [
+    "skills/Autonomous startup business execution"
+  ],
+  "capabilities": {},
+  "agent_trust": "low",
+  "debug_mode": true,
+  "debug_level": 2,
+  "deployment": {
+    "url": "http://0.0.0.0:3773",
+    "expose": true,
+    "protocol_version": "1.0.0",
+    "proxy_urls": [
+      "0.0.0.0"
     ],
-    
-    "capabilities": {
-    },
-    
-
-    "agent_trust": "low",
-    "debug_mode": true,
-    "debug_level": 2,
-    
-    "deployment": {
-        "url": "http://0.0.0.0:3773",
-        "expose": true,
-        "protocol_version": "1.0.0",
-        "proxy_urls": ["0.0.0.0"],
-        "cors_origins": ["*"]
-    },
-    "storage": {
-      "type": "memory"
-    },
-    "scheduler": {
-      "type": "memory"
-    },
-
-    
-    "num_history_sessions": 5,
-    "environment_variables": [
-      {
-        "key": "OPENROUTER_API_KEY",
-        "description": "OpenRouter API key for LLM calls",
-        "required": true
-      },
-      {
-        "key": "MEM0_API_KEY",
-        "description": "Mem0 API key for memory operations",
-        "required": true
-      }
+    "cors_origins": [
+      "*"
     ]
-  }
+  },
+  "storage": {
+    "type": "memory"
+  },
+  "scheduler": {
+    "type": "memory"
+  },
+  "num_history_sessions": 5,
+  "environment_variables": [
+    {
+      "key": "OPENROUTER_API_KEY",
+      "description": "OpenRouter API key for LLM calls",
+      "required": true
+    },
+    {
+      "key": "MEM0_API_KEY",
+      "description": "Mem0 API key for memory operations",
+      "required": true
+    }
+  ]
+}

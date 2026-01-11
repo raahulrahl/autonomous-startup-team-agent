@@ -7,8 +7,7 @@
 #
 #  Thank you users! We ❤️ you! - 🌻
 
-"""autonomous-startup-team-agent - An Bindu Agent.
-"""
+"""autonomous-startup-team-agent - An Bindu Agent."""
 
 from autonomous_startup_team_agent.__version__ import __version__
 from autonomous_startup_team_agent.main import (
