@@ -76,39 +76,41 @@ jobs:
             --header 'X-Bindu-CI: true' \
             --header 'X-API-Token: ${{ secrets.BINDU_API_TOKEN }}' \
             --header 'Content-Type: application/json' \
-            --data-raw '{
-              "agent": {
-                "name": "${{ fromJson(steps.agent_config.outputs.config).name }}",
-                "author": "${{ fromJson(steps.agent_config.outputs.config).author }}",
-                "description": "${{ fromJson(steps.agent_config.outputs.config).description }}",
-                "version": "${{ steps.agent_config.outputs.version }}",
-                "agent_trust": "${{ fromJson(steps.agent_config.outputs.config).agent_trust }}",
-                "type": "research"
-              },
-              "skills": ${{ toJson(fromJson(steps.agent_config.outputs.skills)) }},
-              "framework": {
-                "name": "agno",
-                "version": "1.0.0"
-              },
-              "environment_variables": ${{ toJson(fromJson(steps.agent_config.outputs.config).environment_variables) }},
-              "execution_cost": ${{ toJson(fromJson(steps.agent_config.outputs.config).execution_cost || fromJson('{}')) }},
-              "auth": ${{ toJson(fromJson(steps.agent_config.outputs.config).auth || fromJson('{}')) }},
-              "deployment": {
-                "url": "${{ fromJson(steps.agent_config.outputs.config).deployment.url }}",
-                "protocol_version": "${{ fromJson(steps.agent_config.outputs.config).deployment.protocol_version }}",
-                "docker_image": "raahulrahl/autonomous-startup-team-agent:latest",
-                "docker_digest": "${{ steps.docker_build.outputs.digest }}",
-                "platforms": ["linux/amd64", "linux/arm64"]
-              },
-              "repository": {
-                "url": "https://github.com/${{ github.repository }}",
-                "commit_sha": "${{ github.sha }}",
-                "build_number": "${{ github.run_number }}"
-              },
-              "metadata": {
-                "documentation_url": "https://raahulrahl.github.io/autonomous-startup-team-agent/",
-                "domain": "${{ fromJson(steps.agent_config.outputs.config).metadata.domain || 'general' }}",
-                "specialization": "${{ fromJson(steps.agent_config.outputs.config).metadata.specialization || 'multi-purpose' }}",
-                "last_updated": "${{ github.event.head_commit.timestamp }}"
-              }
-            }'
+            --data @- <<EOF
+          {
+            "agent": {
+              "name": "${{ fromJson(steps.agent_config.outputs.config).name }}",
+              "author": "${{ fromJson(steps.agent_config.outputs.config).author }}",
+              "description": "${{ fromJson(steps.agent_config.outputs.config).description }}",
+              "version": "${{ steps.agent_config.outputs.version }}",
+              "agent_trust": "${{ fromJson(steps.agent_config.outputs.config).agent_trust }}",
+              "type": "research"
+            },
+            "skills": ${{ toJson(fromJson(steps.agent_config.outputs.skills)) }},
+            "framework": {
+              "name": "agno",
+              "version": "1.0.0"
+            },
+            "environment_variables": ${{ toJson(fromJson(steps.agent_config.outputs.config).environment_variables) }},
+            "execution_cost": ${{ toJson(fromJson(steps.agent_config.outputs.config).execution_cost || fromJson('{}')) }},
+            "auth": ${{ toJson(fromJson(steps.agent_config.outputs.config).auth || fromJson('{}')) }},
+            "deployment": {
+              "url": "${{ fromJson(steps.agent_config.outputs.config).deployment.url }}",
+              "protocol_version": "${{ fromJson(steps.agent_config.outputs.config).deployment.protocol_version }}",
+              "docker_image": "raahulrahl/autonomous-startup-team-agent:latest",
+              "docker_digest": "${{ steps.docker_build.outputs.digest }}",
+              "platforms": ["linux/amd64", "linux/arm64"]
+            },
+            "repository": {
+              "url": "https://github.com/${{ github.repository }}",
+              "commit_sha": "${{ github.sha }}",
+              "build_number": "${{ github.run_number }}"
+            },
+            "metadata": {
+              "documentation_url": "https://raahulrahl.github.io/autonomous-startup-team-agent/",
+              "domain": "${{ fromJson(steps.agent_config.outputs.config).metadata.domain || 'general' }}",
+              "specialization": "${{ fromJson(steps.agent_config.outputs.config).metadata.specialization || 'multi-purpose' }}",
+              "last_updated": "${{ github.event.head_commit.timestamp }}"
+            }
+          }
+          EOF
