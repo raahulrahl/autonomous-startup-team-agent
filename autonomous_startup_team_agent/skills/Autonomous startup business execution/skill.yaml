@@ -1,0 +1,238 @@
+id: Autonomous startup business execution-v1
+name: Autonomous startup business execution
+version: 1.0.0
+author: raahul@getbindu.com
+
+# Description
+description: |
+  A complete autonomous startup team led by a CEO agent, coordinating specialized agents across product management, 
+  market research, financial analysis, legal compliance, and sales. This team executes end-to-end startup operations 
+  from strategy to execution with AI-powered decision making and cross-functional collaboration.
+
+# Tags and Modes
+tags:
+  - startup-operations
+  - team-coordination
+  - business-strategy
+  - market-research
+  - financial-planning
+  - legal-compliance
+  - product-management
+  - sales-partnerships
+
+input_modes:
+  - text/plain
+  - application/json
+
+output_modes:
+  - text/plain
+  - application/json
+
+# Example Queries
+examples:
+  - "Analyze our market opportunity and create a go-to-market strategy for our new SaaS product"
+  - "Review this partnership proposal and assess legal, financial, and strategic implications"
+  - "Create a product roadmap based on current market trends and competitive analysis"
+
+# Detailed Capabilities
+capabilities_detail:
+  ceo_orchestration:
+    supported: true
+    description: "CEO agent coordinates all team members for strategic decision-making and execution"
+    features:
+      - "Vision and strategy setting"
+      - "Cross-functional team coordination"
+      - "Resource allocation and prioritization"
+      - "Risk evaluation and opportunity assessment"
+    limitations: "Requires OpenRouter API access and proper configuration of team agents"
+
+  specialized_agents:
+    supported: true
+    description: "Five specialized agents handling distinct business functions"
+    features:
+      - "Product Manager: roadmap, requirements, feature prioritization"
+      - "Market Research: competitive analysis, trends, customer insights (DuckDuckGo, Exa)"
+      - "Financial Analyst: projections, pricing, cash flow analysis (DuckDuckGo)"
+      - "Legal Compliance: regulatory compliance, contract review, IP protection (Exa)"
+      - "Sales & Partnerships: business development, deal negotiation, relationship management"
+
+# Requirements
+requirements:
+  packages:
+    - "agno"
+    - "python-dotenv"
+  api_keys:
+    - "OPENROUTER_API_KEY (required)"
+    - "MEM0_API_KEY (required)"
+    - "EXA_API_KEY (required)"
+  system:
+    - "Python 3.8+"
+  min_memory_mb: 512
+
+# Performance Metrics
+performance:
+  avg_processing_time_ms: 5000
+  max_concurrent_requests: 5
+  memory_per_request_mb: 512
+  scalability: vertical
+
+# Tool Restrictions
+allowed_tools:
+  - DuckDuckGoTools
+  - ExaTools
+  - Mem0Tools
+  - MultiMCPTools
+
+# Rich Documentation
+documentation:
+  overview: |
+    This agent simulates a complete startup executive team with a CEO orchestrating five specialized agents.
+    Each agent has distinct responsibilities and tools, enabling autonomous execution of complex business operations.
+    The CEO agent delegates tasks to appropriate team members and synthesizes their insights for strategic decisions.
+    Built on the Agno framework with OpenRouter models, featuring memory persistence via Mem0 and web research capabilities.
+
+  use_cases:
+    when_to_use:
+      - "Strategic planning requiring cross-functional input (market, finance, product, legal)"
+      - "Partnership and business development opportunity evaluation"
+      - "Product roadmap creation with market validation and financial modeling"
+      - "Comprehensive market entry analysis with competitive intelligence"
+      - "Legal compliance review for new features or business initiatives"
+
+    when_not_to_use:
+      - "Simple single-function tasks that don't require team coordination"
+      - "Real-time customer support (customer support agent currently disabled)"
+      - "Technical implementation or code development"
+      - "Tasks requiring human judgment on sensitive legal or financial decisions"
+
+  input_structure: |
+    Messages are provided as a list of dictionaries with 'role' and 'content' keys.
+
+    Example:
+    [
+      {"role": "user", "content": "Analyze the market for our AI-powered analytics platform"}
+    ]
+
+    Constraints:
+    - Messages must include at least one user message
+    - Content should be clear and specific about the business objective
+    - Complex requests benefit from detailed context
+    - CEO agent will automatically delegate to appropriate team members
+
+  output_format: |
+    Returns agent response with markdown formatting and structured insights.
+
+    Success Response:
+    - CEO agent's strategic synthesis
+    - Individual agent responses (when show_members_responses=True)
+    - Markdown-formatted analysis and recommendations
+    - Citations from web research tools when applicable
+
+    Response includes:
+    - Strategic recommendations
+    - Cross-functional insights
+    - Action items and next steps
+    - Risk assessments and opportunities
+
+  error_handling:
+    - "Missing API keys: Raises ValueError with clear instructions"
+    - "Model initialization failures: Logged and propagated to caller"
+    - "MCP server connection issues: Partial failure allowed, continues with available tools"
+    - "Agent execution errors: Captured and returned in response"
+    - "Timeout handling: 30-second timeout for MCP connections"
+
+  examples:
+    - title: "Market Entry Strategy"
+      input:
+        content: "We're launching an AI-powered CRM. Analyze market opportunity and create go-to-market strategy."
+      output:
+        description: "CEO coordinates Market Research (competitive landscape), Financial Analyst (pricing model), Product Manager (feature prioritization), and Sales (channel strategy) to deliver comprehensive GTM plan"
+
+    - title: "Partnership Evaluation"
+      input:
+        content: "Evaluate partnership with TechCorp for API integration. They want 20% revenue share."
+      output:
+        description: "Sales Agent evaluates opportunity, Legal Compliance reviews terms, Financial Analyst models revenue impact, Product Manager assesses technical fit. CEO synthesizes into recommendation."
+
+  best_practices:
+    for_developers:
+      - "Set OPENROUTER_API_KEY, MEM0_API_KEY, and EXA_API_KEY in environment or .env file"
+      - "Use free OpenRouter models for testing (default: openai/gpt-oss-120b:free)"
+      - "Enable debug_mode for visibility into agent coordination"
+      - "Configure MCP servers in initialize_mcp_tools for additional capabilities"
+
+    for_orchestrators:
+      - "Route multi-functional business strategy questions to this agent"
+      - "Best for tasks requiring cross-departmental coordination"
+      - "Expect 5-10 second response times for complex multi-agent tasks"
+      - "Agent maintains conversation memory via Mem0 for context continuity"
+      - "Monitor OpenRouter API usage as multiple agents make parallel calls"
+
+  installation: |
+    Install required packages:
+    pip install agno python-dotenv
+
+    Set environment variables in .env:
+    OPENROUTER_API_KEY=your_key_here
+    MEM0_API_KEY=your_key_here
+    EXA_API_KEY=your_key_here
+    MODEL_NAME=openai/gpt-oss-120b:free  # or any OpenRouter model
+
+    Run the agent:
+    python main.py --model openai/gpt-oss-120b:free
+
+    Get API keys:
+    - OpenRouter: https://openrouter.ai/
+    - Mem0: https://app.mem0.ai/dashboard/api-keys
+    - Exa: https://exa.ai/dashboard/api-keys
+
+  versioning:
+    - version: "1.0.0"
+      date: "2026-01"
+      changes: "Initial release with CEO, Product Manager, Market Research, Financial Analyst, Legal Compliance, and Sales agents"
+    - version: "1.1.0"
+      status: "planned"
+      changes: "Enable Customer Support agent with Slack integration for real-time support"
+
+# Assessment fields for skill negotiation
+assessment:
+  keywords:
+    - "startup"
+    - "business strategy"
+    - "market analysis"
+    - "product roadmap"
+    - "partnership"
+    - "financial planning"
+    - "legal compliance"
+    - "go-to-market"
+    - "competitive analysis"
+    - "revenue model"
+
+  specializations:
+    - domain: "startup-operations"
+      confidence_boost: 0.4
+    - domain: "business-strategy"
+      confidence_boost: 0.3
+    - domain: "market-research"
+      confidence_boost: 0.3
+    - domain: "financial-analysis"
+      confidence_boost: 0.2
+
+  anti_patterns:
+    - "technical implementation or coding tasks"
+    - "real-time customer support chat"
+    - "single-function queries better suited for specialized agents"
+    - "tasks requiring human legal or financial authority"
+
+  complexity_indicators:
+    simple:
+      - "single department question (e.g., just market research)"
+      - "factual information lookup"
+    medium:
+      - "cross-functional analysis (2-3 agents)"
+      - "partnership evaluation"
+      - "pricing strategy development"
+    complex:
+      - "comprehensive market entry strategy"
+      - "multi-year business planning"
+      - "major strategic pivots requiring all team input"
